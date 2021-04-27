@@ -22,6 +22,7 @@ class CreateModelPacientesTable extends Migration
             $table->unsignedBigInteger('id_ver');
             $table->foreign('id_ver')->references('id')->on('verificados')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nome');
+            $table->string('cpf');
             $table->string('whats');
             $table->integer('ha');
             $table->integer('dia');

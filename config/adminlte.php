@@ -309,7 +309,7 @@ return [
                 ],
                 [
                     'text'    => 'Criar',
-                    'url'     => '#',
+                    'url'     => 'familia/create',
                     'icon' => 'fas fa-fw fa-plus',
                     'icon_color' => 'green',
                 ],

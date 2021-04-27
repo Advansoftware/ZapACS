@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/', [DashController::class, 'index']);
     Route::get('/familia', [FamiliaControler::class, 'index']);
     Route::get('/excel_familia', [FamiliaControler::class, 'excel']);
+    Route::get('/familia/create', [FamiliaControler::class, 'create']);
+    Route::post('/familia/store', [FamiliaControler::class, 'store']);
     Route::get('/contatos', [ContactController::class, 'index']);
     Route::get('/sincronizar', [ContactController::class, 'sincronizar']);
     Route::get('/dados', [ContactController::class, 'dados']);
@@ -33,6 +35,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/whats/user', [ConfigsController::class, 'whatsuser']);
     Route::get('/whats/api', [ConfigsController::class, 'whatsapi']);
     Route::get('/imagem/{sessao}/{numero}', [DashController::class, 'foto']);
+    Route::get('/avisar', [AvisoController::class, 'index']);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });

@@ -34,7 +34,7 @@ class FamiliaControler extends Controller
      */
     public function create()
     {
-        //
+        return view('createFamilia');
     }
 
     /**
@@ -45,7 +45,14 @@ class FamiliaControler extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->objFamilia->create([
+            'numero'=>$request->num,
+            'responsavel'=>$request->nome,
+            'ubs'=>$request->ubs,
+            'local'=>$request->endereco,
+            'qtd_membros'=>$request->qtd,
+            'telefone'=>$request->tel
+        ]);
     }
 
     /**

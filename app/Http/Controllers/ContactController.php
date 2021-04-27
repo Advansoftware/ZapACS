@@ -47,19 +47,8 @@ class ContactController extends Controller
     Public function sincronizar()
     {
         $lista=json_decode(file_get_contents("http://localhost/whats/getavatar.php?sessao=".session('user_sessao')), true);
-        /*
-        $lista = array([
-            '1' => 'bruno',
-            '2' => 'tadeu'
-        ]);*/
-
         SincronizaContatos::dispatch($lista)
-            ->delay(now()->addSecond(10));
-
-
-
-
-
+            ->delay(now()->addSecond(1));
     }
 
     public function notify(){

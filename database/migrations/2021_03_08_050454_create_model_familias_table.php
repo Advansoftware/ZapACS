@@ -19,7 +19,7 @@ class CreateModelFamiliasTable extends Migration
             $table->string('responsavel');
             $table->string('telefone');
             $table->integer('ubs');
-            $table->integer('local');
+            $table->string('local');
             $table->integer('qtd_membros');
             $table->timestamps();
         });

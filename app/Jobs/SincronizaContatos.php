@@ -4,12 +4,10 @@ namespace App\Jobs;
 
 use Exception;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Models\ModelContato;
 use Illuminate\Support\Facades\DB;
 
 class SincronizaContatos implements ShouldQueue
@@ -26,12 +24,12 @@ class SincronizaContatos implements ShouldQueue
     * @var array
     */
     private $lista;
-    private $objContato;
+    private $id;
     protected $fillable=['nome','tel','avatar','endereco','id_bairro','ultima_sinconizacao'];
     public function __construct($lista)
     {
         $this->lista = $lista;
-        $this->objContato=new ModelContato();
+        $this->id = auth()->user()->id;
     }
 
     /**
@@ -41,25 +39,7 @@ class SincronizaContatos implements ShouldQueue
      */
     public function handle()
     {
-        try {
-            print_r($this->lista);
-            $this->teste();
-
-            SincronizaFotos::dispatch($lista)
-            ->delay(now()->addSecond(10));
-
-        } catch (Exception $e) {
-            throw new Exception('falha ao sincronizar contatos');
-        }
-    }
-
-    private function teste()
-    {
-        try {
-            //roda p codpgp
-
-            $conta=0;
-        foreach ($lista as $contato) {
+        foreach ($this->lista as $contato) {
             if(DB::table('contatos')->where('tel', '=', $contato['tel'])->count()){
 
             }
@@ -69,12 +49,20 @@ class SincronizaContatos implements ShouldQueue
                     'tel' => $contato['tel'],
                     'avatar' => $contato['avatar'],
                     'defaultImg'=>$contato['imgDefault'],
-                    'id_user'=> auth()->user()->id
+                    'id_user'=> $this->id
                 ]);
-                $conta++;
              }
         }
-        return $conta;
+
+            /*SincronizaFotos::dispatch($lista)
+            ->delay(now()->addSecond(10));*/
+    }
+
+    private function teste()
+    {
+        try {
+            //roda p codpgp
+
         } catch (Exception $e) {
 
             throw $e;
